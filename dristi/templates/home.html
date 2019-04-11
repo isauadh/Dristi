@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<blockquote class="blockquote text-center">
+  <p class="mb-0">“It's not what a movie is about, it's how it is about it.”</p>
+  <footer class="blockquote-footer"> Roger Ebert </footer>
+</blockquote>
+
+<div class="row">
+	{% for post in posts %}
+			<div class="card" style="width:30%">
+			  <img class="w3-image" src="https://www.cinemark.com/{{ post.Poster }}" style="width:100%" alt="Movie Poster">
+			  <div class="card-body">
+			    <h5 class="card-title">{{ post.Title }}</h5>
+			    <button type="button" class="btn btn-outline-info ">{{post.Rating }}</button>
+			    <button type="button" class="btn btn-outline-info ">{{ post.Runtime }}</button>
+          <div class="dropdown ">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Showtimes
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              {% for showtime in post.Showtimes %}
+                <a class="dropdown-item" href="#">{{ showtime }}</a>
+              {% endfor %}
+            </div>
+          </div>
+			  </div>
+			</div>
+	{% endfor %}
+</div>
+{% endblock content %}

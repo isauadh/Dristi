@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+
+	<blockquote class="blockquote text-center">
+	  <p class="mb-0">“I will eviscerate you in fiction. Every pimple, every character flaw. I was naked for a day; you will be naked for eternity.”</p>
+	  <footer class="blockquote-footer"> Brian Helgeland <cite title="Source Title">A Knight's Tale: The Shooting Script</cite> </footer>
+	</blockquote>
+
+	<div class="row">
+	{% for post in posts %}
+		{% if post.Rating|string() == taste|string() %}
+		<div class="card" style="width:30%">
+			  <img class="w3-image" src="https://www.cinemark.com/{{ post.Poster }}" style="width:100%" alt="Movie Poster">
+			<div class="card-body">
+			    <h5 class="card-title">{{ post.Title }}</h5>
+			    <button type="button" class="btn btn-outline-info ">{{post.Rating }}</button>
+			    <button type="button" class="btn btn-outline-info ">{{ post.Runtime }}</button>
+          		<div class="dropdown ">
+            		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              				Showtimes
+            		</button>
+            		<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              		{% for showtime in post.Showtimes %}
+                		<a class="dropdown-item" href="#">{{ showtime }}</a>
+              		{% endfor %}
+            		</div>
+          		</div>
+			</div>
+		</div>
+		{% endif %}
+	{% endfor %}
+</div>
+{% endblock content %}
